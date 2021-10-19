@@ -11,11 +11,11 @@ type ItemController struct{}
 
 var itemModel = new(model.ItemModel)
 
-func (i ItemController) GetRandom(c echo.Context) {
+func (i ItemController) GetRandom(c echo.Context) error {
 	item, err := itemModel.GetRandom()
 	if err != nil {
 		c.Error(err)
-		return
+		return err
 	}
-	c.JSON(http.StatusOK, item)
+	return c.JSON(http.StatusOK, item)
 }

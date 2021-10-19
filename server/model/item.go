@@ -17,7 +17,7 @@ type Item struct {
 type ItemModel struct{}
 
 func (r ItemModel) GetRandom() (Item, error) {
-	jsonFile, err := ioutil.ReadFile("../items/index.json")
+	jsonFile, err := ioutil.ReadFile("./items/index.json")
 	if err != nil {
 		return Item{}, err
 	}
