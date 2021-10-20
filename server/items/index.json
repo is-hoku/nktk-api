@@ -22,5 +22,17 @@
     "text": "ノイマン型コンピュータが理解できなかった。",
     "class": "3Icomp01",
     "understanding": false
-  }
+  },
+{
+    "id": 5,
+    "text": "演算装置の構成が理解できた。",
+    "class": "3Icomp02",
+    "understanding": true
+},
+{
+    "id": 6,
+    "text": "チップセットが何か理解できなかった。",
+    "class": "3Icomp02",
+    "understanding": false
+}
 ]

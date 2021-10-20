@@ -13,6 +13,7 @@ func NewRouter() *echo.Echo {
 	e.HTTPErrorHandler = controller.JSONErrorHandler
 
 	e.GET("/random", controller.GetRandom)
+	e.GET("/:id", controller.GetByID)
 
 	return e
 }

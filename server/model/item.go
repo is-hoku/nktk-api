@@ -30,3 +30,20 @@ func (r *Item) GetRandom() error {
 	r.Understanding = items[index].Understanding
 	return nil
 }
+
+func (r *Item) GetByID(id int) error {
+	jsonFile, err := ioutil.ReadFile("./items/index.json")
+	if err != nil {
+		return err
+	}
+	var items []Item
+	if err := json.Unmarshal(jsonFile, &items); err != nil {
+		return err
+	}
+	index := id - 1
+	r.ID = items[index].ID
+	r.Text = items[index].Text
+	r.Class = items[index].Class
+	r.Understanding = items[index].Understanding
+	return nil
+}

@@ -3,6 +3,7 @@ package controller
 import (
 	"fmt"
 	"log"
+	"strings"
 
 	"github.com/labstack/echo/v4"
 )
@@ -27,9 +28,21 @@ func JSONErrorHandler(err error, c echo.Context) {
 			})
 		}
 	} else { // 内部での処理のエラーは隠す
-		c.JSON(500, APIError{
-			Status:  500,
-			Message: "Internal Server Error",
-		})
+		if strings.Contains(errmsg, "index out of range") { // 不正なIDでGETした時
+			c.JSON(404, APIError{
+				Status:  404,
+				Message: "Not Found",
+			})
+		} else if strings.Contains(errmsg, "strconv.Atoi: parsing") { // IDに全角文字などを入れた時
+			c.JSON(404, APIError{
+				Status:  404,
+				Message: "Not Found",
+			})
+		} else {
+			c.JSON(500, APIError{
+				Status:  500,
+				Message: "Internal Server Error",
+			})
+		}
 	}
 }
