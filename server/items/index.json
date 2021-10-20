@@ -2,13 +2,25 @@
   {
     "id": 1,
     "text": "Quartusの使い方が理解できた。",
-    "tag": "3Iexperiment",
+    "class": "3Iexp13",
     "understanding": true
   },
   {
     "id": 2,
     "text": "Quartusの使い方が理解できなかった。",
-    "tag": "3Iexperiment",
+    "class": "3Iexp13",
+    "understanding": false
+  },
+  {
+    "id": 3,
+    "text": "コンピュータアーキテクチャが理解できた。",
+    "class": "3Icomp01",
+    "understanding": true
+  },
+  {
+    "id": 4,
+    "text": "ノイマン型コンピュータが理解できなかった。",
+    "class": "3Icomp01",
     "understanding": false
   }
 ]

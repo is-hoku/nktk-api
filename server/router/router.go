@@ -10,6 +10,7 @@ func NewRouter() *echo.Echo {
 	e := echo.New()
 	e.Use(middleware.Recover())
 	e.Use(middleware.Logger())
+	e.HTTPErrorHandler = controller.JSONErrorHandler
 
 	e.GET("/random", controller.GetRandom)
 

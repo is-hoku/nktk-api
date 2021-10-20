@@ -11,7 +11,6 @@ func GetRandom(c echo.Context) error {
 	item := model.Item{}
 	err := item.GetRandom()
 	if err != nil {
-		//c.Error(err)
 		return err
 	}
 	return c.JSON(http.StatusOK, item)

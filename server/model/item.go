@@ -10,7 +10,7 @@ import (
 type Item struct {
 	ID            int    `json:"id"`
 	Text          string `json:"text"`
-	Tag           string `json:"tag"`
+	Class         string `json:"class"`
 	Understanding bool   `json:"understanding"`
 }
 
@@ -26,7 +26,7 @@ func (r *Item) GetRandom() error {
 	index := util.GenarateRandomIntForJSON(len(items))
 	r.ID = items[index].ID
 	r.Text = items[index].Text
-	r.Tag = items[index].Tag
+	r.Class = items[index].Class
 	r.Understanding = items[index].Understanding
 	return nil
 }
