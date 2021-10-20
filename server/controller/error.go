@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/labstack/echo/v4"
 )
@@ -17,17 +18,12 @@ func (err *APIError) Error() string {
 
 func JSONErrorHandler(err error, c echo.Context) {
 	errmsg := err.Error()
-	fmt.Println(errmsg)
+	log.Println(errmsg)
 	if he, ok := err.(*echo.HTTPError); ok {
 		if he.Code == 404 {
 			c.JSON(he.Code, APIError{
 				Status:  he.Code,
 				Message: "Not Found",
-			})
-		} else if he.Code == 500 {
-			c.JSON(he.Code, APIError{
-				Status:  he.Code,
-				Message: "Internal Server Error",
 			})
 		}
 	} else { // 内部での処理のエラーは隠す
