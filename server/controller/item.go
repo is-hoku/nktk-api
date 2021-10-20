@@ -7,14 +7,11 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type ItemController struct{}
-
-var itemModel = new(model.ItemModel)
-
-func (i ItemController) GetRandom(c echo.Context) error {
-	item, err := itemModel.GetRandom()
+func GetRandom(c echo.Context) error {
+	item := model.Item{}
+	err := item.GetRandom()
 	if err != nil {
-		c.Error(err)
+		//c.Error(err)
 		return err
 	}
 	return c.JSON(http.StatusOK, item)

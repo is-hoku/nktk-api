@@ -11,8 +11,7 @@ func NewRouter() *echo.Echo {
 	e.Use(middleware.Recover())
 	e.Use(middleware.Logger())
 
-	item := new(controller.ItemController)
-	e.GET("/random", item.GetRandom)
+	e.GET("/random", controller.GetRandom)
 
 	return e
 }
