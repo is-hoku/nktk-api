@@ -8,6 +8,5 @@ import (
 func main() {
 	config.Init("config.yml")
 	r := router.NewRouter()
-	//	r.Run(config.Config.Port)
 	r.Logger.Fatal(r.Start(config.Config.Port))
 }
