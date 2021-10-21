@@ -29,6 +29,8 @@ func TestGetByID(t *testing.T) {
 		}
 		if item.ID == 0 || item.Text == "" || item.Class == "" {
 			t.Error("A body is not included.")
+		} else if item.ID != 1 {
+			t.Error("Wrong Response.")
 		}
 	})
 
@@ -67,6 +69,41 @@ func TestRandom(t *testing.T) {
 
 	t.Run("is_404", func(t *testing.T) {
 		request := httptest.NewRequest("GET", "/NotFoundパス", nil)
+		recorder := httptest.NewRecorder()
+		router.ServeHTTP(recorder, request)
+
+		if http.StatusNotFound != recorder.Code {
+			t.Error("A status code is not 404.")
+		}
+	})
+}
+
+func TestRandomParam(t *testing.T) {
+	router := router.NewRouter()
+
+	t.Run("is_200", func(t *testing.T) {
+		request := httptest.NewRequest("GET", "/random?class=3Iexp13", nil)
+		recorder := httptest.NewRecorder()
+		router.ServeHTTP(recorder, request)
+
+		if http.StatusOK != recorder.Code {
+			t.Error("A status code is not 200.")
+		}
+		body := recorder.Body.String()
+		var item model.Item
+		err := json.Unmarshal([]byte(body), &item)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if item.ID == 0 || item.Text == "" || item.Class == "" {
+			t.Error("A body is not included.")
+		} else if item.Class != "3Iexp13" {
+			t.Error("Wrong Response.")
+		}
+	})
+
+	t.Run("is_404", func(t *testing.T) {
+		request := httptest.NewRequest("GET", "/random?class=notfoundclass", nil)
 		recorder := httptest.NewRecorder()
 		router.ServeHTTP(recorder, request)
 

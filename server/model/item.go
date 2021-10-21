@@ -14,7 +14,7 @@ type Item struct {
 	Understanding bool   `json:"understanding"`
 }
 
-func (r *Item) GetRandom() error {
+func (r *Item) GetRandom(class string) error {
 	jsonFile, err := ioutil.ReadFile("./items/index.json")
 	if err != nil {
 		return err
@@ -23,12 +23,28 @@ func (r *Item) GetRandom() error {
 	if err := json.Unmarshal(jsonFile, &items); err != nil {
 		return err
 	}
-	index := util.GenarateRandomIntForJSON(len(items))
-	r.ID = items[index].ID
-	r.Text = items[index].Text
-	r.Class = items[index].Class
-	r.Understanding = items[index].Understanding
-	return nil
+
+	if class == "" { // 条件なしランダム
+		index := util.GenarateRandomIntForJSON(len(items))
+		r.ID = items[index].ID
+		r.Text = items[index].Text
+		r.Class = items[index].Class
+		r.Understanding = items[index].Understanding
+		return nil
+	} else { // class が指定されたランダム
+		var searchedItems []Item
+		for _, v := range items {
+			if v.Class == class {
+				searchedItems = append(searchedItems, v)
+			}
+		}
+		index := util.GenarateRandomIntForJSON(len(searchedItems))
+		r.ID = searchedItems[index].ID
+		r.Text = searchedItems[index].Text
+		r.Class = searchedItems[index].Class
+		r.Understanding = searchedItems[index].Understanding
+		return nil
+	}
 }
 
 func (r *Item) GetByID(id int) error {

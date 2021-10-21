@@ -10,7 +10,8 @@ import (
 
 func GetRandom(c echo.Context) error {
 	item := model.Item{}
-	err := item.GetRandom()
+	class := c.QueryParams().Get("class")
+	err := item.GetRandom(class)
 	if err != nil {
 		return err
 	}

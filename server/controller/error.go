@@ -38,6 +38,11 @@ func JSONErrorHandler(err error, c echo.Context) {
 				Status:  404,
 				Message: "Not Found",
 			})
+		} else if strings.Contains(errmsg, "invalid argument to Intn") { // 無効なパラメータでGETした場合
+			c.JSON(404, APIError{
+				Status:  404,
+				Message: "Not Found",
+			})
 		} else {
 			c.JSON(500, APIError{
 				Status:  500,
